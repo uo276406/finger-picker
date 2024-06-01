@@ -1,36 +1,45 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  StyleSheet,
-  View,
-  Dimensions,
-  Text,
-  Animated,
-  Alert,
-} from "react-native";
+import { View, Dimensions, Text, Animated, Image } from "react-native";
 import {
   GestureHandlerRootView,
   PanGestureHandler,
 } from "react-native-gesture-handler";
 
-import { getRandomColor } from "./utils/utils";
+import { getRandomColor, toSeconds } from "./utils/utils";
+import { styles } from "./styles/styles";
 
 const { width, height } = Dimensions.get("window");
+const animationTime = 2000;
+const timeoutRoulette = 5000;
+const targetAnimationScale = 2.5;
+const initialAnimationScale = 1;
 
 const App = () => {
+  const animationValue = useRef(new Animated.Value(1)).current;
+  const [timeoutLeft, setTimeoutLeft] = useState(toSeconds(timeoutRoulette));
   const [fingers, setFingers] = useState([]);
   const [selectedFinger, setSelectedFinger] = useState(null);
-  const animationValue = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (timeoutLeft > 0 && fingers.length > 0)
+        setTimeoutLeft((prevTimeoutLeft) => prevTimeoutLeft - 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [fingers, timeoutLeft]);
 
   const handleBeganGestureEvent = (event) => {
     const { x, y } = event.nativeEvent;
-    const numberOfPointers = fingers.length + 1;
 
     setFingers((prevFingers) => {
       const updatedFingers = [
         ...prevFingers,
-        { key: numberOfPointers, x, y, color: getRandomColor() },
+        { key: fingers.length + 1, x, y, color: getRandomColor() },
       ];
-      console.log("updatedFingers", updatedFingers);
+      setTimeoutLeft(toSeconds(timeoutRoulette));
       return updatedFingers;
     });
   };
@@ -45,19 +54,20 @@ const App = () => {
 
         Animated.sequence([
           Animated.timing(animationValue, {
-            toValue: 2,
-            duration: 2500,
+            toValue: targetAnimationScale,
+            duration: animationTime,
             useNativeDriver: true,
           }),
           Animated.timing(animationValue, {
-            toValue: 1,
-            duration: 2500,
+            toValue: initialAnimationScale,
+            duration: animationTime,
             useNativeDriver: true,
           }),
         ]).start(() => {
           setFingers([]);
+          setTimeoutLeft(toSeconds(timeoutRoulette));
         });
-      }, 5000);
+      }, timeoutRoulette);
     }
 
     return () => {
@@ -71,6 +81,13 @@ const App = () => {
     <GestureHandlerRootView style={styles.container}>
       <PanGestureHandler onBegan={handleBeganGestureEvent}>
         <View style={styles.touchArea}>
+          <View style={styles.timerContainer}>
+            <Image
+              source={require("./assets/chrono.png")}
+              style={{ width: 50, height: 50 }}
+            />
+            <Text style={styles.timerText}>{timeoutLeft}</Text>
+          </View>
           {fingers.map((finger) => (
             <Animated.View
               key={finger.key}
@@ -89,7 +106,7 @@ const App = () => {
                 },
               ]}
             >
-              <Text style={[styles.text]}>{finger.key}</Text>
+              <Text style={[styles.fingerText]}>{finger.key}</Text>
             </Animated.View>
           ))}
         </View>
@@ -97,31 +114,5 @@ const App = () => {
     </GestureHandlerRootView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  touchArea: {
-    flex: 1,
-    backgroundColor: "black",
-  },
-  finger: {
-    position: "absolute",
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-  },
-  text: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center", // Alineación horizontal centrada
-    textAlignVertical: "center", // Alineación vertical centrada
-    fontSize: 35,
-  },
-  highlighted: {
-    backgroundColor: "yellow",
-  },
-});
 
 export default App;
