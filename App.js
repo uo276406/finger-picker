@@ -6,7 +6,7 @@ import {
 } from "react-native-gesture-handler";
 
 import { getRandomColor, toSeconds, getRandomNumber } from "./utils/utils";
-import { styles } from "./styles/styles";
+import { AppStyles } from "./styles/app.styles";
 import TimeContainerComponent from "./components/TimeContainerComponent";
 import FingerTouchComponent from "./components/FingerTouchComponent";
 
@@ -70,9 +70,9 @@ const App = () => {
   }, [fingers]);
 
   return (
-    <GestureHandlerRootView style={styles.container}>
+    <GestureHandlerRootView style={AppStyles.container}>
       <PanGestureHandler onBegan={handleBeganGestureEvent}>
-        <View style={styles.touchArea}>
+        <View style={AppStyles.touchArea}>
           <TimeContainerComponent
             timeoutLeft={timeoutLeft}
             setTimeoutLeft={setTimeoutLeft}

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { View, Text, Image } from "react-native";
-import { styles } from "../styles/styles";
+import { TimeContainerStyles } from "../styles/time.container.styles";
 
 const TimeContainerComponent = ({ timeoutLeft, setTimeoutLeft, fingers }) => {
   useEffect(() => {
@@ -15,12 +15,12 @@ const TimeContainerComponent = ({ timeoutLeft, setTimeoutLeft, fingers }) => {
   }, [fingers, timeoutLeft]);
 
   return (
-    <View style={styles.timerContainer}>
+    <View style={TimeContainerStyles.timerContainer}>
       <Image
         source={require("../assets/chrono.png")}
         style={{ width: 50, height: 50 }}
       />
-      <Text style={styles.timerText}>{timeoutLeft}</Text>
+      <Text style={TimeContainerStyles.timerText}>{timeoutLeft}</Text>
     </View>
   );
 };

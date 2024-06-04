@@ -1,13 +1,13 @@
 import React from "react";
 import { Animated, Text } from "react-native";
-import { styles } from "../styles/styles";
+import { FingerTouchStyles } from "../styles/finger.touch.styles";
 
 const FingerTouchComponent = ({ selectedFinger, animationValue, finger }) => {
   return (
     <Animated.View
       key={finger.key}
       style={[
-        styles.finger,
+        FingerTouchStyles.finger,
         {
           top: finger.y - 25,
           left: finger.x - 25,
@@ -20,7 +20,7 @@ const FingerTouchComponent = ({ selectedFinger, animationValue, finger }) => {
         },
       ]}
     >
-      <Text style={[styles.fingerText]}>{finger.key}</Text>
+      <Text style={[FingerTouchStyles.fingerText]}>{finger.key}</Text>
     </Animated.View>
   );
 };
