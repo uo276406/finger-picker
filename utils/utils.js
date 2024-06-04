@@ -25,3 +25,7 @@ export const getRandomColor = () => {
 export const toSeconds = (milliseconds) => {
   return milliseconds / 1000;
 };
+
+export const getRandomNumber = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};

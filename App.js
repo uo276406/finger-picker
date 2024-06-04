@@ -1,35 +1,28 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Dimensions, Text, Animated, Image } from "react-native";
+import { View, Dimensions, Animated } from "react-native";
 import {
   GestureHandlerRootView,
   PanGestureHandler,
 } from "react-native-gesture-handler";
 
-import { getRandomColor, toSeconds } from "./utils/utils";
+import { getRandomColor, toSeconds, getRandomNumber } from "./utils/utils";
 import { styles } from "./styles/styles";
+import TimeContainerComponent from "./components/TimeContainerComponent";
+import FingerTouchComponent from "./components/FingerTouchComponent";
 
 const { width, height } = Dimensions.get("window");
 const animationTime = 2000;
-const timeoutRoulette = 5000;
+const baseTimeoutRoulette = 5000;
 const targetAnimationScale = 2.5;
 const initialAnimationScale = 1;
 
 const App = () => {
   const animationValue = useRef(new Animated.Value(1)).current;
-  const [timeoutLeft, setTimeoutLeft] = useState(toSeconds(timeoutRoulette));
+  const [timeoutLeft, setTimeoutLeft] = useState(
+    toSeconds(baseTimeoutRoulette)
+  );
   const [fingers, setFingers] = useState([]);
   const [selectedFinger, setSelectedFinger] = useState(null);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      if (timeoutLeft > 0 && fingers.length > 0)
-        setTimeoutLeft((prevTimeoutLeft) => prevTimeoutLeft - 1);
-    }, 1000);
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [fingers, timeoutLeft]);
 
   const handleBeganGestureEvent = (event) => {
     const { x, y } = event.nativeEvent;
@@ -39,7 +32,7 @@ const App = () => {
         ...prevFingers,
         { key: fingers.length + 1, x, y, color: getRandomColor() },
       ];
-      setTimeoutLeft(toSeconds(timeoutRoulette));
+      setTimeoutLeft(toSeconds(baseTimeoutRoulette));
       return updatedFingers;
     });
   };
@@ -49,8 +42,7 @@ const App = () => {
 
     if (fingers.length > 0) {
       timeoutId = setTimeout(() => {
-        const randomIndex = Math.floor(Math.random() * fingers.length);
-        setSelectedFinger(fingers[randomIndex]);
+        setSelectedFinger(fingers[getRandomNumber(0, fingers.length - 1)]);
 
         Animated.sequence([
           Animated.timing(animationValue, {
@@ -65,9 +57,9 @@ const App = () => {
           }),
         ]).start(() => {
           setFingers([]);
-          setTimeoutLeft(toSeconds(timeoutRoulette));
+          setTimeoutLeft(toSeconds(baseTimeoutRoulette));
         });
-      }, timeoutRoulette);
+      }, baseTimeoutRoulette);
     }
 
     return () => {
@@ -81,33 +73,18 @@ const App = () => {
     <GestureHandlerRootView style={styles.container}>
       <PanGestureHandler onBegan={handleBeganGestureEvent}>
         <View style={styles.touchArea}>
-          <View style={styles.timerContainer}>
-            <Image
-              source={require("./assets/chrono.png")}
-              style={{ width: 50, height: 50 }}
-            />
-            <Text style={styles.timerText}>{timeoutLeft}</Text>
-          </View>
+          <TimeContainerComponent
+            timeoutLeft={timeoutLeft}
+            setTimeoutLeft={setTimeoutLeft}
+            fingers={fingers}
+          />
           {fingers.map((finger) => (
-            <Animated.View
+            <FingerTouchComponent
               key={finger.key}
-              style={[
-                styles.finger,
-                {
-                  top: finger.y - 25,
-                  left: finger.x - 25,
-                  backgroundColor: finger.color,
-                  transform: [
-                    {
-                      scale:
-                        selectedFinger?.key === finger.key ? animationValue : 1,
-                    },
-                  ],
-                },
-              ]}
-            >
-              <Text style={[styles.fingerText]}>{finger.key}</Text>
-            </Animated.View>
+              finger={finger}
+              selectedFinger={selectedFinger}
+              animationValue={animationValue}
+            />
           ))}
         </View>
       </PanGestureHandler>
