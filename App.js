@@ -5,10 +5,13 @@ import {
   PanGestureHandler,
 } from "react-native-gesture-handler";
 
+import "./lang/i18n";
+
 import { getRandomColor, toSeconds, getRandomNumber } from "./utils/utils";
 import { AppStyles } from "./styles/app.styles";
 import TimeContainerComponent from "./components/TimeContainerComponent";
 import FingerTouchComponent from "./components/FingerTouchComponent";
+import HelpModalComponent from "./components/HelpModalComponent";
 
 const { width, height } = Dimensions.get("window");
 const animationTime = 2000;
@@ -23,6 +26,7 @@ const App = () => {
   );
   const [fingers, setFingers] = useState([]);
   const [selectedFinger, setSelectedFinger] = useState(null);
+  const [modalVisible, setModalVisible] = useState(true);
 
   const handleBeganGestureEvent = (event) => {
     const { x, y } = event.nativeEvent;
@@ -58,6 +62,7 @@ const App = () => {
         ]).start(() => {
           setFingers([]);
           setTimeoutLeft(toSeconds(baseTimeoutRoulette));
+          setSelectedFinger(null);
         });
       }, baseTimeoutRoulette);
     }
@@ -73,6 +78,10 @@ const App = () => {
     <GestureHandlerRootView style={AppStyles.container}>
       <PanGestureHandler onBegan={handleBeganGestureEvent}>
         <View style={AppStyles.touchArea}>
+          <HelpModalComponent
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+          />
           <TimeContainerComponent
             timeoutLeft={timeoutLeft}
             setTimeoutLeft={setTimeoutLeft}

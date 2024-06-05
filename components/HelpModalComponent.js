@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Modal, View, Text, Pressable } from "react-native";
-import { styles } from "../styles/app.styles";
+import { ModalStyles } from "../styles/modal.styles";
 
-const HelpModalComponent = () => {
-  const [modalVisible, setModalVisible] = useState(true);
+import { useTranslation } from "react-i18next";
+
+const HelpModalComponent = ({ modalVisible, setModalVisible }) => {
+  const { t } = useTranslation();
 
   return (
     <Modal
@@ -14,14 +16,16 @@ const HelpModalComponent = () => {
         setModalVisible(!modalVisible);
       }}
     >
-      <View style={styles.centeredView}>
-        <View style={styles.modalView}>
-          <Text style={styles.modalText}>Hello World!</Text>
+      <View style={ModalStyles.centeredView}>
+        <View style={ModalStyles.modalView}>
+          <Text style={ModalStyles.modalText}>{t("HELP_MODAL_CONTENT")}</Text>
           <Pressable
-            style={[styles.button, styles.buttonClose]}
+            style={[ModalStyles.button, ModalStyles.buttonClose]}
             onPress={() => setModalVisible(!modalVisible)}
           >
-            <Text style={styles.textStyle}>Hide Modal</Text>
+            <Text style={ModalStyles.textStyle}>
+              {t("HELP_MODAL_CLOSE_BUTTON")}
+            </Text>
           </Pressable>
         </View>
       </View>

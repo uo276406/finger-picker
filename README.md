@@ -1,4 +1,8 @@
-# Sample Snack app
+# Finger Roulette Game
+
+Finger Roulette is a game where you put your finger on the screen and then after some time a finger is selected randomly.
+
+# Development instructions
 
 Open the `App.js` file to start writing some code. You can preview the changes directly on your phone or tablet by scanning the **QR code** or use the iOS or Android emulators. When you're done, click **Save** and share the link!
 
