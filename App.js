@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Dimensions, Animated } from "react-native";
+import { View, Dimensions, Animated, Button } from "react-native";
 import {
   GestureHandlerRootView,
   PanGestureHandler,
@@ -12,6 +12,7 @@ import { AppStyles } from "./styles/app.styles";
 import TimeContainerComponent from "./components/TimeContainerComponent";
 import FingerTouchComponent from "./components/FingerTouchComponent";
 import HelpModalComponent from "./components/HelpModalComponent";
+import HelpButtonComponent from "./components/HelpButtonComponent";
 
 const { width, height } = Dimensions.get("window");
 const animationTime = 2000;
@@ -76,16 +77,19 @@ const App = () => {
 
   return (
     <GestureHandlerRootView style={AppStyles.container}>
+      <View style={AppStyles.header}>
+        <TimeContainerComponent
+          timeoutLeft={timeoutLeft}
+          setTimeoutLeft={setTimeoutLeft}
+          fingers={fingers}
+        />
+        <HelpButtonComponent setModalVisible={setModalVisible} />
+      </View>
       <PanGestureHandler onBegan={handleBeganGestureEvent}>
         <View style={AppStyles.touchArea}>
           <HelpModalComponent
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
-          />
-          <TimeContainerComponent
-            timeoutLeft={timeoutLeft}
-            setTimeoutLeft={setTimeoutLeft}
-            fingers={fingers}
           />
           {fingers.map((finger) => (
             <FingerTouchComponent
