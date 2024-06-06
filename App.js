@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Dimensions, Animated, Image } from "react-native";
+import { View, Dimensions, Animated, Text } from "react-native";
 import {
   GestureHandlerRootView,
   PanGestureHandler,
@@ -38,6 +38,7 @@ const App = () => {
         ...prevFingers,
         { key: fingers.length + 1, x, y, color: getRandomColor() },
       ];
+      setFirstTouch(false);
       setTimeoutLeft(toSeconds(baseTimeoutRoulette));
       return updatedFingers;
     });
@@ -65,6 +66,7 @@ const App = () => {
           setFingers([]);
           setTimeoutLeft(toSeconds(baseTimeoutRoulette));
           setSelectedFinger(null);
+          setFirstTouch(true);
         });
       }, baseTimeoutRoulette);
     }
@@ -92,14 +94,20 @@ const App = () => {
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
           />
-          {fingers.map((finger) => (
-            <FingerTouchComponent
-              key={finger.key}
-              finger={finger}
-              selectedFinger={selectedFinger}
-              animationValue={animationValue}
-            />
-          ))}
+          {firstTouch ? (
+            <Text style={AppStyles.initialTextStyle}>Haga click</Text>
+          ) : (
+            <>
+              {fingers.map((finger) => (
+                <FingerTouchComponent
+                  key={finger.key}
+                  finger={finger}
+                  selectedFinger={selectedFinger}
+                  animationValue={animationValue}
+                />
+              ))}
+            </>
+          )}
         </View>
       </PanGestureHandler>
     </GestureHandlerRootView>

@@ -7,6 +7,8 @@ export const AppStyles = StyleSheet.create({
   },
   touchArea: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   header: {
     flex: 1,
@@ -16,5 +18,12 @@ export const AppStyles = StyleSheet.create({
     paddingRight: 20,
     maxHeight: 140,
     backgroundColor: "black",
+  },
+  initialTextStyle: {
+    display: "flex",
+    textAlign: "center",
+    color: "black",
+    fontWeight: "bold",
+    fontSize: 20,
   },
 });
