@@ -3,7 +3,8 @@ import { StyleSheet } from "react-native";
 export const ModalStyles = StyleSheet.create({
   modalView: {
     margin: 20,
-    backgroundColor: "orange",
+    marginTop: 200,
+    backgroundColor: "black",
     borderRadius: 10,
     padding: 35,
     alignItems: "center",
@@ -16,20 +17,23 @@ export const ModalStyles = StyleSheet.create({
   },
   button: {
     borderRadius: 10,
-    padding: 10,
+    paddingHorizontal: 26,
+    paddingVertical: 12,
     elevation: 2,
   },
   buttonClose: {
-    backgroundColor: "black",
-    color: "orange",
+    backgroundColor: "white",
+    color: "white",
   },
   textStyle: {
-    color: "orange",
+    color: "black",
     fontWeight: "bold",
     textAlign: "center",
   },
   modalText: {
     marginBottom: 15,
+    fontSize: 14,
     textAlign: "center",
+    color: "white",
   },
 });

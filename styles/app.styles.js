@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const AppStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: "white",
   },
   touchArea: {
     flex: 1,
@@ -12,8 +12,9 @@ export const AppStyles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "space-between",
-    paddingTop: 20,
+    paddingTop: 50,
     paddingRight: 20,
-    maxHeight: 100,
+    maxHeight: 140,
+    backgroundColor: "black",
   },
 });

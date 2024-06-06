@@ -8,13 +8,12 @@ export const TimeContainerStyles = StyleSheet.create({
     alignItems: "center",
     gap: 8,
     padding: 8,
+    marginTop: 50,
     margin: 20,
-    borderWidth: 4,
-    borderColor: "orange",
-    borderRadius: 26,
   },
   timerText: {
-    color: "orange",
-    fontSize: 32,
+    color: "white",
+    fontStyle: "bold",
+    fontSize: 42,
   },
 });

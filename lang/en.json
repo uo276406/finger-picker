@@ -1,7 +1,8 @@
 {
     "translation": {
         "HELP_MODAL_CLOSE_BUTTON": "Okey",
-        "HELP_MODAL_TITLE": "Help",
-        "HELP_MODAL_CONTENT": "This is a game of chance. You can play with your friends or alone. The game is simple, you just have to put your finger on the screen and wait for the gun to fire. If the gun fires, you lose. If the gun doesn't fire, you win. You can also play with your friends, just pass the phone to the next player and let them play. The game is over when the gun fires. Good luck!"
+        "HELP_MODAL_CONTENT1": "Pess the screen! 👥👆",
+        "HELP_MODAL_CONTENT2": "Remember your number! 🤔🧠",
+        "HELP_MODAL_CONTENT3": "Wait till the raffle! 🕰️🥳"
     }
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Dimensions, Animated, Button } from "react-native";
+import { View, Dimensions, Animated, Image } from "react-native";
 import {
   GestureHandlerRootView,
   PanGestureHandler,
@@ -28,6 +28,7 @@ const App = () => {
   const [fingers, setFingers] = useState([]);
   const [selectedFinger, setSelectedFinger] = useState(null);
   const [modalVisible, setModalVisible] = useState(true);
+  const [firstTouch, setFirstTouch] = useState(true);
 
   const handleBeganGestureEvent = (event) => {
     const { x, y } = event.nativeEvent;

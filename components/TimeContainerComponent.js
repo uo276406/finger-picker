@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Vibration } from "react-native";
 import { TimeContainerStyles } from "../styles/time.container.styles";
 
 const TimeContainerComponent = ({ timeoutLeft, setTimeoutLeft, fingers }) => {
   useEffect(() => {
     const intervalId = setInterval(() => {
-      if (timeoutLeft > 0 && fingers.length > 0)
+      if (timeoutLeft > 0 && fingers.length > 0) {
         setTimeoutLeft((prevTimeoutLeft) => prevTimeoutLeft - 1);
+        Vibration.vibrate(200);
+      }
     }, 1000);
 
     return () => {

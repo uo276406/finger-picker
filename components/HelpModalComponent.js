@@ -16,18 +16,18 @@ const HelpModalComponent = ({ modalVisible, setModalVisible }) => {
         setModalVisible(!modalVisible);
       }}
     >
-      <View style={ModalStyles.centeredView}>
-        <View style={ModalStyles.modalView}>
-          <Text style={ModalStyles.modalText}>{t("HELP_MODAL_CONTENT")}</Text>
-          <Pressable
-            style={[ModalStyles.button, ModalStyles.buttonClose]}
-            onPress={() => setModalVisible(!modalVisible)}
-          >
-            <Text style={ModalStyles.textStyle}>
-              {t("HELP_MODAL_CLOSE_BUTTON")}
-            </Text>
-          </Pressable>
-        </View>
+      <View style={ModalStyles.modalView}>
+        <Text style={ModalStyles.modalText}>{t("HELP_MODAL_CONTENT1")}</Text>
+        <Text style={ModalStyles.modalText}>{t("HELP_MODAL_CONTENT2")}</Text>
+        <Text style={ModalStyles.modalText}>{t("HELP_MODAL_CONTENT3")}</Text>
+        <Pressable
+          style={[ModalStyles.button, ModalStyles.buttonClose]}
+          onPress={() => setModalVisible(!modalVisible)}
+        >
+          <Text style={ModalStyles.textStyle}>
+            {t("HELP_MODAL_CLOSE_BUTTON")}
+          </Text>
+        </Pressable>
       </View>
     </Modal>
   );
