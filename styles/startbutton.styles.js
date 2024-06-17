@@ -5,6 +5,5 @@ export const StartButtonStyles = StyleSheet.create({
     position: "absolute",
     bottom: 20,
     right: 20,
-    backgroundColor: "white",
   },
 });

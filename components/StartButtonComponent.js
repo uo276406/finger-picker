@@ -16,7 +16,7 @@ const StartButtonComponent = ({ setRouletteStarted }) => {
     >
       <Image
         source={require("../assets/start.png")} // Reemplaza con la URL de tu imagen
-        style={{ width: 50, height: 50 }}
+        style={{ width: 55, height: 55 }}
       />
     </TouchableOpacity>
   );

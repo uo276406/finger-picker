@@ -2,18 +2,18 @@ import { StyleSheet } from "react-native";
 
 export const TimeContainerStyles = StyleSheet.create({
   timerContainer: {
-    position: "absolute",
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
     gap: 8,
     padding: 8,
-    marginTop: 50,
     margin: 20,
+    backgroundColor: "transparent", // Add this line to make the background transparent
   },
   timerText: {
-    color: "white",
+    color: "black",
     fontStyle: "bold",
-    fontSize: 42,
+    fontSize: 150,
   },
 });

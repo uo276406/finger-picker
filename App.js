@@ -83,12 +83,6 @@ const App = () => {
   return (
     <GestureHandlerRootView style={AppStyles.container}>
       <View style={AppStyles.header}>
-        <TimeContainerComponent
-          timeoutLeft={timeoutLeft}
-          setTimeoutLeft={setTimeoutLeft}
-          fingers={fingers}
-          rouletteStarted={rouletteStarted}
-        />
         <HelpButtonComponent setModalVisible={setModalVisible} />
       </View>
       <PanGestureHandler onBegan={handleBeganGestureEvent}>
@@ -113,8 +107,16 @@ const App = () => {
           )}
         </View>
       </PanGestureHandler>
+      {rouletteStarted && timeoutLeft > 0 && (
+        <TimeContainerComponent
+          timeoutLeft={timeoutLeft}
+          setTimeoutLeft={setTimeoutLeft}
+          fingers={fingers}
+          rouletteStarted={rouletteStarted}
+        />
+      )}
       <View style={AppStyles.footer}>
-        {!rouletteStarted && fingers.length > 0 && (
+        {!rouletteStarted && fingers.length >= 0 && (
           <StartButtonComponent setRouletteStarted={setRouletteStarted} />
         )}
       </View>

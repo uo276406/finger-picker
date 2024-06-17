@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, Image, Vibration } from "react-native";
+import { View, Text, Vibration } from "react-native";
 import { TimeContainerStyles } from "../styles/time.container.styles";
 
 const TimeContainerComponent = ({
@@ -23,10 +23,6 @@ const TimeContainerComponent = ({
 
   return (
     <View style={TimeContainerStyles.timerContainer}>
-      <Image
-        source={require("../assets/chrono.png")}
-        style={{ width: 50, height: 50 }}
-      />
       <Text style={TimeContainerStyles.timerText}>{timeoutLeft}</Text>
     </View>
   );
