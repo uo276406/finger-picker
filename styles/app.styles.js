@@ -26,4 +26,10 @@ export const AppStyles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
   },
+  footer: {
+    flex: 1,
+    justifyContent: "flex-end",
+    backgroundColor: "white",
+    maxHeight: 100,
+  },
 });

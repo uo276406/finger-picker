@@ -13,10 +13,11 @@ import TimeContainerComponent from "./components/TimeContainerComponent";
 import FingerTouchComponent from "./components/FingerTouchComponent";
 import HelpModalComponent from "./components/HelpModalComponent";
 import HelpButtonComponent from "./components/HelpButtonComponent";
+import StartButtonComponent from "./components/StartButtonComponent";
 
 const { width, height } = Dimensions.get("window");
 const animationTime = 2000;
-const baseTimeoutRoulette = 5000;
+const baseTimeoutRoulette = 3000;
 const targetAnimationScale = 2.5;
 const initialAnimationScale = 1;
 
@@ -25,6 +26,7 @@ const App = () => {
   const [timeoutLeft, setTimeoutLeft] = useState(
     toSeconds(baseTimeoutRoulette)
   );
+  const [rouletteStarted, setRouletteStarted] = useState(false);
   const [fingers, setFingers] = useState([]);
   const [selectedFinger, setSelectedFinger] = useState(null);
   const [modalVisible, setModalVisible] = useState(true);
@@ -39,7 +41,6 @@ const App = () => {
         { key: fingers.length + 1, x, y, color: getRandomColor() },
       ];
       setFirstTouch(false);
-      setTimeoutLeft(toSeconds(baseTimeoutRoulette));
       return updatedFingers;
     });
   };
@@ -47,7 +48,7 @@ const App = () => {
   useEffect(() => {
     let timeoutId;
 
-    if (fingers.length > 0) {
+    if (rouletteStarted && fingers.length > 0) {
       timeoutId = setTimeout(() => {
         setSelectedFinger(fingers[getRandomNumber(0, fingers.length - 1)]);
 
@@ -67,6 +68,7 @@ const App = () => {
           setTimeoutLeft(toSeconds(baseTimeoutRoulette));
           setSelectedFinger(null);
           setFirstTouch(true);
+          setRouletteStarted(false);
         });
       }, baseTimeoutRoulette);
     }
@@ -76,7 +78,7 @@ const App = () => {
         clearTimeout(timeoutId);
       }
     };
-  }, [fingers]);
+  }, [fingers, rouletteStarted]);
 
   return (
     <GestureHandlerRootView style={AppStyles.container}>
@@ -85,6 +87,7 @@ const App = () => {
           timeoutLeft={timeoutLeft}
           setTimeoutLeft={setTimeoutLeft}
           fingers={fingers}
+          rouletteStarted={rouletteStarted}
         />
         <HelpButtonComponent setModalVisible={setModalVisible} />
       </View>
@@ -110,6 +113,11 @@ const App = () => {
           )}
         </View>
       </PanGestureHandler>
+      <View style={AppStyles.footer}>
+        {!rouletteStarted && fingers.length > 0 && (
+          <StartButtonComponent setRouletteStarted={setRouletteStarted} />
+        )}
+      </View>
     </GestureHandlerRootView>
   );
 };
