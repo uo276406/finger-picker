@@ -7,7 +7,6 @@ export const ModalStyles = StyleSheet.create({
     backgroundColor: "black",
     borderRadius: 10,
     padding: 35,
-    alignItems: "center",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -22,18 +21,18 @@ export const ModalStyles = StyleSheet.create({
     elevation: 2,
   },
   buttonClose: {
+    display: "flex",
     backgroundColor: "white",
-    color: "white",
   },
   textStyle: {
     color: "black",
     fontWeight: "bold",
     textAlign: "center",
+    fontSize: 20,
   },
   modalText: {
     marginBottom: 15,
-    fontSize: 14,
-    textAlign: "center",
+    fontSize: 16,
     color: "white",
   },
 });

@@ -12,7 +12,7 @@ const TimeContainerComponent = ({
     const intervalId = setInterval(() => {
       if (timeoutLeft > 0 && fingers.length > 0 && rouletteStarted) {
         setTimeoutLeft((prevTimeoutLeft) => prevTimeoutLeft - 1);
-        Vibration.vibrate(200);
+        Vibration.vibrate(300);
       }
     }, 1000);
 

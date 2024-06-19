@@ -1,8 +1,9 @@
 {
     "translation": {
         "HELP_MODAL_CLOSE_BUTTON": "Vale",
-        "HELP_MODAL_CONTENT1": "Pulsen en la pantalla para empezar. 👥👆",
-        "HELP_MODAL_CONTENT2": "!Recuerde su número! 🤔🧠",
-        "HELP_MODAL_CONTENT3": "¡Espere al sorteo! 🕰️🥳"
+        "HELP_MODAL_CONTENT1": "1. Pulsen en la pantalla",
+        "HELP_MODAL_CONTENT2": "2. Recuerden su número",
+        "HELP_MODAL_CONTENT3": "3. Hagan click en el botón de sorteo",
+        "INITIAL_TEXT": "¡Pulse para empezar!"
     }
 }

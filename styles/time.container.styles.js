@@ -14,6 +14,6 @@ export const TimeContainerStyles = StyleSheet.create({
   timerText: {
     color: "black",
     fontStyle: "bold",
-    fontSize: 150,
+    fontSize: 190,
   },
 });

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Dimensions, Animated, Text } from "react-native";
+import { useTranslation } from "react-i18next";
+import { View, Image, Animated, Text } from "react-native";
 import {
   GestureHandlerRootView,
   PanGestureHandler,
@@ -15,13 +16,14 @@ import HelpModalComponent from "./components/HelpModalComponent";
 import HelpButtonComponent from "./components/HelpButtonComponent";
 import StartButtonComponent from "./components/StartButtonComponent";
 
-const { width, height } = Dimensions.get("window");
 const animationTime = 2000;
 const baseTimeoutRoulette = 3000;
 const targetAnimationScale = 2.5;
 const initialAnimationScale = 1;
 
 const App = () => {
+  const { t } = useTranslation();
+
   const animationValue = useRef(new Animated.Value(1)).current;
   const [timeoutLeft, setTimeoutLeft] = useState(
     toSeconds(baseTimeoutRoulette)
@@ -32,9 +34,31 @@ const App = () => {
   const [modalVisible, setModalVisible] = useState(true);
   const [firstTouch, setFirstTouch] = useState(true);
 
-  const handleBeganGestureEvent = (event) => {
-    const { x, y } = event.nativeEvent;
+  const emphasisAnimation = useRef(new Animated.Value(1)).current;
 
+  useEffect(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(emphasisAnimation, {
+          toValue: 1.2,
+          duration: 1000,
+          useNativeDriver: true,
+        }),
+        Animated.timing(emphasisAnimation, {
+          toValue: 1,
+          duration: 1000,
+          useNativeDriver: true,
+        }),
+      ])
+    ).start();
+  }, [emphasisAnimation, rouletteStarted]);
+
+  const handleBeganGestureEvent = (event) => {
+    if (rouletteStarted) {
+      return;
+    }
+
+    const { x, y } = event.nativeEvent;
     setFingers((prevFingers) => {
       const updatedFingers = [
         ...prevFingers,
@@ -69,6 +93,7 @@ const App = () => {
           setSelectedFinger(null);
           setFirstTouch(true);
           setRouletteStarted(false);
+          emphasisAnimation.setValue(1);
         });
       }, baseTimeoutRoulette);
     }
@@ -92,7 +117,20 @@ const App = () => {
             setModalVisible={setModalVisible}
           />
           {firstTouch ? (
-            <Text style={AppStyles.initialTextStyle}>Haga click</Text>
+            <Animated.View
+              style={[
+                AppStyles.initialTextContainer,
+                { transform: [{ scale: emphasisAnimation }] },
+              ]}
+            >
+              <Text style={AppStyles.initialTextStyle}>
+                {t("INITIAL_TEXT")}
+              </Text>
+              <Image
+                source={require("./assets/hand-touch.png")}
+                style={{ width: 100, height: 100 }}
+              />
+            </Animated.View>
           ) : (
             <>
               {fingers.map((finger) => (
@@ -116,8 +154,10 @@ const App = () => {
         />
       )}
       <View style={AppStyles.footer}>
-        {!rouletteStarted && fingers.length >= 0 && (
+        {!rouletteStarted && fingers.length > 0 ? (
           <StartButtonComponent setRouletteStarted={setRouletteStarted} />
+        ) : (
+          <></>
         )}
       </View>
     </GestureHandlerRootView>

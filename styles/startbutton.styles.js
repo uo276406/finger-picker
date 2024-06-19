@@ -2,8 +2,8 @@ import { StyleSheet } from "react-native";
 
 export const StartButtonStyles = StyleSheet.create({
   button: {
-    position: "absolute",
-    bottom: 20,
-    right: 20,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
