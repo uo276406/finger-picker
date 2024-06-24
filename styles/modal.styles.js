@@ -78,4 +78,13 @@ export const ModalStyles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+  video: {
+    width: 100,
+    height: 200,
+  },
+  videoContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
