@@ -36,6 +36,7 @@ const App = () => {
   const [firstTouch, setFirstTouch] = useState(true);
   const [modalHelpVisible, setModalHelpVisible] = useState(true);
   const [modalHistoryVisible, setModalHistoryVisible] = useState(false);
+  let history = useRef([]).current;
 
   const emphasisAnimation = useRef(new Animated.Value(1)).current;
 
@@ -77,7 +78,9 @@ const App = () => {
 
     if (rouletteStarted && fingers.length > 0) {
       timeoutId = setTimeout(() => {
-        setSelectedFinger(fingers[getRandomNumber(0, fingers.length - 1)]);
+        let result = getRandomNumber(0, fingers.length - 1);
+        history.push(result + 1);
+        setSelectedFinger(fingers[result]);
 
         Animated.sequence([
           Animated.timing(animationValue, {
@@ -125,6 +128,7 @@ const App = () => {
           <HistoryModalComponent
             modalHistoryVisible={modalHistoryVisible}
             setModalHistoryVisible={setModalHistoryVisible}
+            history={history}
           />
           {firstTouch ? (
             <Animated.View

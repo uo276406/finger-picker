@@ -8,6 +8,7 @@ import { ScrollView } from "react-native-gesture-handler";
 const HistoryModalComponent = ({
   modalHistoryVisible,
   setModalHistoryVisible,
+  history,
 }) => {
   const { t } = useTranslation();
 
@@ -20,7 +21,7 @@ const HistoryModalComponent = ({
         setModalHistoryVisible(!modalHistoryVisible);
       }}
     >
-      <View style={ModalStyles.modalView}>
+      <View style={ModalStyles.historyModalView}>
         <Text style={ModalStyles.modalHistoryText}>
           {t("HISTORY_MODAL_TITLE")}
         </Text>
@@ -28,16 +29,21 @@ const HistoryModalComponent = ({
           style={ModalStyles.scrollHistory}
           showsVerticalScrollIndicator={true}
         >
-          <Text style={ModalStyles.historyItem}>1</Text>
-          <Text style={ModalStyles.historyItem}>2</Text>
-          <Text style={ModalStyles.historyItem}>3</Text>
-          <Text style={ModalStyles.historyItem}>4</Text>
-          <Text style={ModalStyles.historyItem}>5</Text>
-          <Text style={ModalStyles.historyItem}>6</Text>
-          <Text style={ModalStyles.historyItem}>7</Text>
-          <Text style={ModalStyles.historyItem}>8</Text>
+          {history.length !== 0 ? (
+            history
+              .slice()
+              .reverse()
+              .map((item, index) => (
+                <Text key={index} style={ModalStyles.historyItem}>
+                  {item}
+                </Text>
+              ))
+          ) : (
+            <Text style={ModalStyles.emptyHistoryText}>
+              {t("HISTORY_MODAL_EMPTY")}
+            </Text>
+          )}
         </ScrollView>
-
         <Pressable
           style={[ModalStyles.button, ModalStyles.buttonClose]}
           onPress={() => setModalHistoryVisible(!modalHistoryVisible)}

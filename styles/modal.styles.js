@@ -13,7 +13,22 @@ export const ModalStyles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     elevation: 5,
-    maxHeight: 400,
+    maxHeight: 450,
+  },
+  historyModalView: {
+    margin: 20,
+    marginTop: 200,
+    backgroundColor: "black",
+    borderRadius: 10,
+    padding: 35,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    elevation: 5,
+    maxHeight: 450,
+    minHeight: 400,
   },
   button: {
     borderRadius: 10,
@@ -55,5 +70,12 @@ export const ModalStyles = StyleSheet.create({
     color: "black",
     borderBottomWidth: 1,
     borderBottomColor: "black",
+  },
+  emptyHistoryText: {
+    paddingTop: "30%",
+    fontSize: 22,
+    color: "black",
+    fontWeight: "bold",
+    textAlign: "center",
   },
 });

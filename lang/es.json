@@ -6,6 +6,7 @@
         "HELP_MODAL_CONTENT3": "3. Hagan click en el botón de sorteo",
         "INITIAL_TEXT": "¡Pulse para empezar!",
         "HISTORY_MODAL_TITLE": "Últimos resultados",
-        "HISTORY_MODAL_CLOSE_BUTTON": "Vale"
+        "HISTORY_MODAL_CLOSE_BUTTON": "Vale",
+        "HISTORY_MODAL_EMPTY": "¡Aún no hay resultados!"
     }
 }
