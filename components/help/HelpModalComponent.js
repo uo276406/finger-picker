@@ -41,7 +41,7 @@ const HelpModalComponent = ({ modalHelpVisible, setModalHelpVisible }) => {
             ref={video}
             style={ModalStyles.video}
             resizeMode={ResizeMode.CONTAIN}
-            useNativeControls
+            useNativeControls={false}
             isLooping
             autoPlay
           />
