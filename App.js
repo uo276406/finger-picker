@@ -12,9 +12,11 @@ import { getRandomColor, toSeconds, getRandomNumber } from "./utils/utils";
 import { AppStyles } from "./styles/app.styles";
 import TimeContainerComponent from "./components/TimeContainerComponent";
 import FingerTouchComponent from "./components/FingerTouchComponent";
-import HelpModalComponent from "./components/HelpModalComponent";
-import HelpButtonComponent from "./components/HelpButtonComponent";
+import HelpModalComponent from "./components/help/HelpModalComponent";
+import HelpButtonComponent from "./components/help/HelpButtonComponent";
 import StartButtonComponent from "./components/StartButtonComponent";
+import HistoryButtonComponent from "./components/history/HistoryButtonComponent";
+import HistoryModalComponent from "./components/history/HistoryModalComponent";
 
 const animationTime = 2000;
 const baseTimeoutRoulette = 3000;
@@ -31,8 +33,9 @@ const App = () => {
   const [rouletteStarted, setRouletteStarted] = useState(false);
   const [fingers, setFingers] = useState([]);
   const [selectedFinger, setSelectedFinger] = useState(null);
-  const [modalVisible, setModalVisible] = useState(true);
   const [firstTouch, setFirstTouch] = useState(true);
+  const [modalHelpVisible, setModalHelpVisible] = useState(true);
+  const [modalHistoryVisible, setModalHistoryVisible] = useState(false);
 
   const emphasisAnimation = useRef(new Animated.Value(1)).current;
 
@@ -108,13 +111,20 @@ const App = () => {
   return (
     <GestureHandlerRootView style={AppStyles.container}>
       <View style={AppStyles.header}>
-        <HelpButtonComponent setModalVisible={setModalVisible} />
+        <HistoryButtonComponent
+          setModalHistoryVisible={setModalHistoryVisible}
+        />
+        <HelpButtonComponent setModalHelpVisible={setModalHelpVisible} />
       </View>
       <PanGestureHandler onBegan={handleBeganGestureEvent}>
         <View style={AppStyles.touchArea}>
           <HelpModalComponent
-            modalVisible={modalVisible}
-            setModalVisible={setModalVisible}
+            modalHelpVisible={modalHelpVisible}
+            setModalHelpVisible={setModalHelpVisible}
+          />
+          <HistoryModalComponent
+            modalHistoryVisible={modalHistoryVisible}
+            setModalHistoryVisible={setModalHistoryVisible}
           />
           {firstTouch ? (
             <Animated.View

@@ -13,6 +13,7 @@ export const ModalStyles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     elevation: 5,
+    maxHeight: 400,
   },
   button: {
     borderRadius: 10,
@@ -23,6 +24,7 @@ export const ModalStyles = StyleSheet.create({
   buttonClose: {
     display: "flex",
     backgroundColor: "white",
+    marginTop: 15,
   },
   textStyle: {
     color: "black",
@@ -30,9 +32,28 @@ export const ModalStyles = StyleSheet.create({
     textAlign: "center",
     fontSize: 20,
   },
-  modalText: {
+  modalHelpText: {
     marginBottom: 15,
     fontSize: 16,
     color: "white",
+  },
+  modalHistoryText: {
+    marginBottom: 15,
+    fontSize: 20,
+    textAlign: "center",
+    color: "white",
+  },
+  scrollHistory: {
+    backgroundColor: "white",
+    borderRadius: 10,
+    paddingBottom: 10,
+  },
+  historyItem: {
+    marginBottom: 5,
+    fontSize: 20,
+    textAlign: "center",
+    color: "black",
+    borderBottomWidth: 1,
+    borderBottomColor: "black",
   },
 });

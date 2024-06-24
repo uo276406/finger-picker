@@ -1,9 +1,11 @@
 {
     "translation": {
-        "HELP_MODAL_CLOSE_BUTTON": "Okey",
+        "HELP_MODAL_CLOSE_BUTTON": "Ok",
         "HELP_MODAL_CONTENT1": "1. Press the screen",
         "HELP_MODAL_CONTENT2": "2. Remember your number!",
         "HELP_MODAL_CONTENT3": "3. Click the button to start!",
-        "INITIAL_TEXT": "Tap to start!"
+        "INITIAL_TEXT": "Tap to start!",
+        "HISTORY_MODAL_TITLE": "Last results",
+        "HISTORY_MODAL_CLOSE_BUTTON": "Ok"
     }
 }
