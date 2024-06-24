@@ -1,6 +1,6 @@
-# Finger Roulette Game
+# Finger Picker Game
 
-Finger Roulette is a game where you put your finger on the screen and then after some time a finger is selected randomly.
+Finger Picker is a game where you put your finger on the screen and then after some time a finger is selected randomly.
 
 # Development instructions
 
