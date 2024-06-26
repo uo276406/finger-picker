@@ -5,7 +5,9 @@
   "build": {
     "development": {
       "android": {
-        "buildType": "apk"
+        "buildType": "apk",
+        "developmentClient": true,
+        "distribution": "internal"
       }
     },
     "production": {
