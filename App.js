@@ -2,11 +2,17 @@ import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { View, Image, Animated, Text } from "react-native";
 import {
+  BannerAd,
+  BannerAdSize,
+  TestIds,
+} from "react-native-google-mobile-ads";
+import {
   GestureHandlerRootView,
   PanGestureHandler,
 } from "react-native-gesture-handler";
 
 import "./lang/i18n";
+import "expo-dev-client";
 
 import { getRandomColor, toSeconds, getRandomNumber } from "./utils/utils";
 import { AppStyles } from "./styles/app.styles";
@@ -22,6 +28,9 @@ const animationTime = 2000;
 const baseTimeoutRoulette = 3000;
 const targetAnimationScale = 2.5;
 const initialAnimationScale = 1;
+const adUnitId = __DEV__
+  ? TestIds.BANNER
+  : "ca-app-pub-2908698308342404/8626471927";
 
 const App = () => {
   const { t } = useTranslation();
@@ -39,6 +48,7 @@ const App = () => {
   let history = useRef([]).current;
 
   const emphasisAnimation = useRef(new Animated.Value(1)).current;
+  const bannerRef = useRef(null);
 
   useEffect(() => {
     Animated.loop(
@@ -174,6 +184,14 @@ const App = () => {
           <></>
         )}
       </View>
+      <BannerAd
+        unitId={adUnitId}
+        size={BannerAdSize.FULL_BANNER}
+        ref={bannerRef}
+        requestOptions={{
+          requestNonPersonalizedAdsOnly: true,
+        }}
+      />
     </GestureHandlerRootView>
   );
 };

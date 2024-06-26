@@ -39,7 +39,18 @@
       "url": "https://u.expo.dev/6f0aca04-fa80-4c60-a5e5-0e329b586e20"
     },
     "plugins": [
-      "expo-video"
+      "expo-video",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
+        }
+      ]
     ]
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-2908698308342404/8626471927"
   }
 }
