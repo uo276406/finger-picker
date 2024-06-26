@@ -12,7 +12,6 @@ import {
 } from "react-native-gesture-handler";
 
 import "./lang/i18n";
-import "expo-dev-client";
 
 import { getRandomColor, toSeconds, getRandomNumber } from "./utils/utils";
 import { AppStyles } from "./styles/app.styles";
