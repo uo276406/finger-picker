@@ -10,7 +10,7 @@
         "distribution": "internal"
       },
       "ios": {
-        "buildType": "simulator",
+        "simulator": true,
         "developmentClient": true,
         "distribution": "internal"
       }
