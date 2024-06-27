@@ -8,11 +8,19 @@
         "buildType": "apk",
         "developmentClient": true,
         "distribution": "internal"
+      },
+      "ios": {
+        "buildType": "simulator",
+        "developmentClient": true,
+        "distribution": "internal"
       }
     },
     "production": {
       "android": {
-        "buildType": "apk"
+        "buildType": "app-bundle"
+      },
+      "ios": {
+        "buildType": "ipa"
       }
     }
   }

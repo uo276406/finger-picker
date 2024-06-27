@@ -28,9 +28,17 @@ const animationTime = 2000;
 const baseTimeoutRoulette = 3000;
 const targetAnimationScale = 2.5;
 const initialAnimationScale = 1;
-const adUnitId = __DEV__
-  ? TestIds.BANNER
-  : "ca-app-pub-2908698308342404/8626471927";
+
+let adUnitIdBannerFooter;
+if (__DEV__) {
+  adUnitIdBannerFooter = TestIds.BANNER;
+} else {
+  if (Platform.OS === "ios") {
+    adUnitIdBannerFooter = "ca-app-pub-2908698308342404/7051188887";
+  } else {
+    adUnitIdBannerFooter = "ca-app-pub-2908698308342404/8626471927";
+  }
+}
 
 const App = () => {
   const { t } = useTranslation();
@@ -185,7 +193,7 @@ const App = () => {
         )}
       </View>
       <BannerAd
-        unitId={adUnitId}
+        unitId={adUnitIdBannerFooter}
         size={BannerAdSize.FULL_BANNER}
         ref={bannerRef}
         requestOptions={{
