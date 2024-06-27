@@ -13,8 +13,8 @@ const HelpModalComponent = ({ modalHelpVisible, setModalHelpVisible }) => {
   const video = useRef(null);
 
   useEffect(() => {
-    video.current.playAsync();
-  }, [video]);
+    if (modalHelpVisible && video.current) video.current.playAsync();
+  }, [video, modalHelpVisible]);
 
   return (
     <Modal
