@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { View, Text, Vibration } from "react-native";
 import { TimeContainerStyles } from "../styles/time.container.styles";
 
+// Contador de tiempo
 const TimeContainerComponent = ({
   timeoutLeft,
   setTimeoutLeft,
